@@ -1,5 +1,5 @@
 root = "./"
-thread = 8
+thread = 1
 logger = nil
 logpath = "."
 harbor = 1
