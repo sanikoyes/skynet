@@ -1,10 +1,15 @@
 ## 前言
 ```
-此版本修改自官方版skynet，改动部分如下：
-1、sproto修改，添加了real（双精度浮点数double）的支持，以及variant类型（可以是real/int/string/bool）的支持
-2、windows下不支持epoll，故采用event-select网络模型模拟epoll来保证最小改动skynet源码的情况下，实现网络通讯
-3、windows平台下没有pipe兼容的接口，采用了socket api来模拟这一机制
-4、控制台输入，hack修改了read函数来模拟读取fd 0(stdin)
+此版本克隆自sanikoyes的skynet vs2013分支版本，改动部分如下：
+1、添加了skynet_win项目，默认配置成执行.\skynet .\examples\config命令行，可以尝试在main.lua下个断点试试
+2）添加了luatest项目，用来测试Babelua插件是否能够正确调试lua5.3代码
+```
+
+## 调试
+```
+1、安装最新版visual studio 2013扩展插件 Babelua（3.2.2.0）
+2、官方提供的Babelua插件只支持lua 5.1，https://github.com/jxlczjp77/decoda.git这个修改版支持了lua5.3和skynet调试，编译好后将LuaInject.dll替换掉Babelua插件安装目录中的对应文件（win10下是在C:\Users\zjp\AppData\Local\Microsoft\VisualStudio\12.0\Extensions\03hzxr2j.bvx\LuaInject.dll目录）
+3、由于LuaInject对多个线程调度多个lua vm处理的不好，很容易崩溃被调试的进程，最好将skynet config文件的thread参数设置为1（thread = 1）
 ```
 
 ## 编译
