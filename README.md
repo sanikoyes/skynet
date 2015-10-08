@@ -15,6 +15,14 @@
 Extensions\03hzxr2j.bvx\LuaInject.dll目录）
 3、由于LuaInject对多个线程调度多个lua vm处理的不好，很容易崩溃被调试的进程，
 最好将skynet config文件的thread参数设置为1（thread = 1）
+
+注意：
+	对于F10(单步逐过程)的处理不是很好，碰到skynet.call等这种会让出当前lua协程的代码，
+	会跳到上一个skynet.suspend代码处，调试起来并不友好。如果需要在skynet.call（或其
+	他类似调用）的下一行断下来，应该先设置一个断点在下一行后F5跑起来
+
+	Babelua的项目文件管理类似Eclipse，会将添加的*.lua文件拷贝到项目的脚本文件夹目录，
+	所以此版本的两个Babelua项目文件都是手工编辑了项目配置文件。请参考Babelua的文档
 ```
 
 ## 编译
