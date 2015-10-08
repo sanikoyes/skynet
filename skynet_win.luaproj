@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{e88f3f90-b805-449c-b364-0d7c6fe98eb5}</ProjectGuid>
+    <!--$guid1$-->
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>
+    </StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="examples\" />
+    <Folder Include="examples\login\" />
+    <Folder Include="lualib\" />
+    <Folder Include="lualib\http\" />
+    <Folder Include="lualib\sharedata\" />
+    <Folder Include="lualib\skynet\" />
+    <Folder Include="lualib\snax\" />
+    <Folder Include="service\" />
+    <Folder Include="test\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="examples\config" />
+    <Content Include="examples\config.c1" />
+    <Content Include="examples\config.c2" />
+    <Content Include="examples\config.login" />
+    <Content Include="examples\config.mc" />
+    <Content Include="examples\config.mysql" />
+    <Content Include="examples\config.userlog" />
+    <Content Include="examples\config_log" />
+    <Content Include="test\sharemap.sp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="examples\abort.lua" />
+    <Compile Include="examples\agent.lua" />
+    <Compile Include="examples\client.lua" />
+    <Compile Include="examples\cluster1.lua" />
+    <Compile Include="examples\cluster2.lua" />
+    <Compile Include="examples\clustername.lua" />
+    <Compile Include="examples\globallog.lua" />
+    <Compile Include="examples\injectlaunch.lua" />
+    <Compile Include="examples\login\client.lua" />
+    <Compile Include="examples\login\gated.lua" />
+    <Compile Include="examples\login\logind.lua" />
+    <Compile Include="examples\login\main.lua" />
+    <Compile Include="examples\login\msgagent.lua" />
+    <Compile Include="examples\main.lua" />
+    <Compile Include="examples\main_log.lua" />
+    <Compile Include="examples\main_mysql.lua" />
+    <Compile Include="examples\preload.lua" />
+    <Compile Include="examples\proto.lua" />
+    <Compile Include="examples\protoloader.lua" />
+    <Compile Include="examples\share.lua" />
+    <Compile Include="examples\simpledb.lua" />
+    <Compile Include="examples\simplemonitor.lua" />
+    <Compile Include="examples\simpleweb.lua" />
+    <Compile Include="examples\userlog.lua" />
+    <Compile Include="examples\watchdog.lua" />
+    <Compile Include="lualib\cluster.lua" />
+    <Compile Include="lualib\datacenter.lua" />
+    <Compile Include="lualib\dns.lua" />
+    <Compile Include="lualib\http\httpc.lua" />
+    <Compile Include="lualib\http\httpd.lua" />
+    <Compile Include="lualib\http\internal.lua" />
+    <Compile Include="lualib\http\sockethelper.lua" />
+    <Compile Include="lualib\http\url.lua" />
+    <Compile Include="lualib\loader.lua" />
+    <Compile Include="lualib\md5.lua" />
+    <Compile Include="lualib\mongo.lua" />
+    <Compile Include="lualib\mqueue.lua" />
+    <Compile Include="lualib\multicast.lua" />
+    <Compile Include="lualib\mysql.lua" />
+    <Compile Include="lualib\redis.lua" />
+    <Compile Include="lualib\sharedata.lua" />
+    <Compile Include="lualib\sharedata\corelib.lua" />
+    <Compile Include="lualib\sharemap.lua" />
+    <Compile Include="lualib\skynet.lua" />
+    <Compile Include="lualib\skynet\debug.lua" />
+    <Compile Include="lualib\skynet\harbor.lua" />
+    <Compile Include="lualib\skynet\inject.lua" />
+    <Compile Include="lualib\skynet\injectcode.lua" />
+    <Compile Include="lualib\skynet\manager.lua" />
+    <Compile Include="lualib\skynet\queue.lua" />
+    <Compile Include="lualib\skynet\remotedebug.lua" />
+    <Compile Include="lualib\snax.lua" />
+    <Compile Include="lualib\snax\gateserver.lua" />
+    <Compile Include="lualib\snax\hotfix.lua" />
+    <Compile Include="lualib\snax\interface.lua" />
+    <Compile Include="lualib\snax\loginserver.lua" />
+    <Compile Include="lualib\snax\msgserver.lua" />
+    <Compile Include="lualib\socket.lua" />
+    <Compile Include="lualib\socketchannel.lua" />
+    <Compile Include="lualib\sproto.lua" />
+    <Compile Include="lualib\sprotoloader.lua" />
+    <Compile Include="lualib\sprotoparser.lua" />
+    <Compile Include="service\bootstrap.lua" />
+    <Compile Include="service\cdummy.lua" />
+    <Compile Include="service\clusterd.lua" />
+    <Compile Include="service\clusterproxy.lua" />
+    <Compile Include="service\cmaster.lua" />
+    <Compile Include="service\cmemory.lua" />
+    <Compile Include="service\console.lua" />
+    <Compile Include="service\cslave.lua" />
+    <Compile Include="service\datacenterd.lua" />
+    <Compile Include="service\dbg.lua" />
+    <Compile Include="service\debug_agent.lua" />
+    <Compile Include="service\debug_console.lua" />
+    <Compile Include="service\gate.lua" />
+    <Compile Include="service\launcher.lua" />
+    <Compile Include="service\multicastd.lua" />
+    <Compile Include="service\service_mgr.lua" />
+    <Compile Include="service\sharedatad.lua" />
+    <Compile Include="service\snaxd.lua" />
+    <Compile Include="test\pingserver.lua" />
+    <Compile Include="test\testdatacenter.lua" />
+    <Compile Include="test\testdeadcall.lua" />
+    <Compile Include="test\testdeadloop.lua" />
+    <Compile Include="test\testdns.lua" />
+    <Compile Include="test\testecho.lua" />
+    <Compile Include="test\testharborlink.lua" />
+    <Compile Include="test\testhttp.lua" />
+    <Compile Include="test\testmongodb.lua" />
+    <Compile Include="test\testmulticast.lua" />
+    <Compile Include="test\testmulticast2.lua" />
+    <Compile Include="test\testmysql.lua" />
+    <Compile Include="test\testoverload.lua" />
+    <Compile Include="test\testping.lua" />
+    <Compile Include="test\testqueue.lua" />
+    <Compile Include="test\testredis.lua" />
+    <Compile Include="test\testredis2.lua" />
+    <Compile Include="test\testresponse.lua" />
+    <Compile Include="test\testsha.lua" />
+    <Compile Include="test\testsm.lua" />
+    <Compile Include="test\testsocket.lua" />
+    <Compile Include="test\teststm.lua" />
+    <Compile Include="test\testterm.lua" />
+    <Compile Include="test\testtimer.lua" />
+    <Compile Include="test\testudp.lua" />
+    <Compile Include="test\time.lua" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
+</Project>
