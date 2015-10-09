@@ -23,6 +23,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include=".\examples\test.lua" />
+    <Compile Include="examples\leveldb_test.lua" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="examples\" />

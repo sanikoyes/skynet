@@ -12,17 +12,10 @@
 2、官方提供的Babelua插件只支持lua 5.1，https://github.com/jxlczjp77/decoda.git这个修改版
 支持了lua5.3和skynet调试，编译好后将LuaInject.dll替换掉Babelua插件安装目录中的对应文件
 （win10在C:\Users\zjp\AppData\Local\Microsoft\VisualStudio\12.0\
-Extensions\03hzxr2j.bvx\LuaInject.dll目录）
-3、由于LuaInject对多个线程调度多个lua vm处理的不好，很容易崩溃被调试的进程，
-最好将skynet config文件的thread参数设置为1（thread = 1）
+Extensions\03hzxr2j.bvx\LuaInject.dll目录），或者使用预编译好的3rd/decoda/LuaInject.dll
+3、由于LuaInject对多个线程调度多个lua vm处理的不好，调试时最好将skynet 
+config文件的thread参数设置为1（thread = 1）
 
-注意：
-	对于F10(单步逐过程)的处理不是很好，碰到skynet.call等这种会让出当前lua协程的代码，
-	会跳到上一个skynet.suspend代码处，调试起来并不友好。如果需要在skynet.call（或其
-	他类似调用）的下一行断下来，应该先设置一个断点在下一行后F5跑起来
-
-	Babelua的项目文件管理类似Eclipse，会将添加的*.lua文件拷贝到项目的脚本文件夹目录，
-	所以此版本的两个Babelua项目文件都是手工编辑了项目配置文件。请参考Babelua的文档
 ```
 
 ## 编译

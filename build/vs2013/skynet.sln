@@ -117,6 +117,8 @@ Project("{5697748A-77EF-44CA-8824-4F5637E5945B}") = "luatest", "..\..\luatest.lu
 EndProject
 Project("{5697748A-77EF-44CA-8824-4F5637E5945B}") = "skynet_win", "..\..\skynet_win.luaproj", "{E88F3F90-B805-449C-B364-0D7C6FE98EB5}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "leveldb", "3rd\leveldb.vcxproj", "{30907C96-1FE4-46CE-A925-506C4A020590}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -427,6 +429,16 @@ Global
 		{E88F3F90-B805-449C-B364-0D7C6FE98EB5}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{E88F3F90-B805-449C-B364-0D7C6FE98EB5}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{E88F3F90-B805-449C-B364-0D7C6FE98EB5}.Release|Win32.ActiveCfg = Release|Any CPU
+		{30907C96-1FE4-46CE-A925-506C4A020590}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{30907C96-1FE4-46CE-A925-506C4A020590}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{30907C96-1FE4-46CE-A925-506C4A020590}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{30907C96-1FE4-46CE-A925-506C4A020590}.Debug|Win32.ActiveCfg = Debug|Win32
+		{30907C96-1FE4-46CE-A925-506C4A020590}.Debug|Win32.Build.0 = Debug|Win32
+		{30907C96-1FE4-46CE-A925-506C4A020590}.Release|Any CPU.ActiveCfg = Release|Win32
+		{30907C96-1FE4-46CE-A925-506C4A020590}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{30907C96-1FE4-46CE-A925-506C4A020590}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{30907C96-1FE4-46CE-A925-506C4A020590}.Release|Win32.ActiveCfg = Release|Win32
+		{30907C96-1FE4-46CE-A925-506C4A020590}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -458,5 +470,6 @@ Global
 		{44F52237-AE31-499F-A74C-4E02B0FAD898} = {223656D9-5628-47EA-8BB2-38A10EA727B2}
 		{96D44760-8DBD-4A4F-A73D-9FDD74E42586} = {968950DD-91C6-4DB9-8A2E-7E10C89C75BB}
 		{979F9EBF-8071-472A-8D88-7E059DC5984B} = {968950DD-91C6-4DB9-8A2E-7E10C89C75BB}
+		{30907C96-1FE4-46CE-A925-506C4A020590} = {223656D9-5628-47EA-8BB2-38A10EA727B2}
 	EndGlobalSection
 EndGlobal

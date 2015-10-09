@@ -129,11 +129,3 @@ EXPORTS
 	skynet_callback
 	skynet_current_handle
 
-	skynet_error
-	skynet_command
-	skynet_queryname
-	skynet_send
-	skynet_sendname
-	skynet_isremote
-	skynet_callback
-	skynet_current_handle
