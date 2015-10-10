@@ -90,6 +90,10 @@ int sigign() {
 
 static const char * load_config = "\
 	local config_name = ...\
+	local k = string.match(config_name, '^(.*)%.lua$') \
+	if k ~= nil then \
+		return{thread = 1, bootstrap = 'snlua ' .. k, luaservice='?.lua'} \
+	end \
 	local f = assert(io.open(config_name))\
 	local code = assert(f:read \'*a\')\
 	local function getenv(name) return assert(os.getenv(name), \'os.getenv() failed: \' .. name) end\
