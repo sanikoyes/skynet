@@ -26,6 +26,7 @@
     <Folder Include="examples\login\" />
     <Folder Include="lualib\" />
     <Folder Include="lualib\http\" />
+    <Folder Include="lualib\zset\" />
     <Folder Include="lualib\sharedata\" />
     <Folder Include="lualib\skynet\" />
     <Folder Include="lualib\snax\" />
@@ -106,6 +107,9 @@
     <Compile Include="lualib\sproto.lua" />
     <Compile Include="lualib\sprotoloader.lua" />
     <Compile Include="lualib\sprotoparser.lua" />
+    <Compile Include="lualib\zset\test.lua" />
+    <Compile Include="lualib\zset\test_sl.lua" />
+    <Compile Include="lualib\zset\zset.lua" />
     <Compile Include="service\bootstrap.lua" />
     <Compile Include="service\cdummy.lua" />
     <Compile Include="service\clusterd.lua" />

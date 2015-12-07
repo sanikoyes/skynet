@@ -14,7 +14,7 @@ skynet.start(function()
 	print(body)
 
 	local respheader = {}
-	dns.server()
+	dns.server('192.168.1.1', 53)
 	local ip = dns.resolve "baidu.com"
 	print(string.format("GET %s (baidu.com)", ip))
 	local status, body = httpc.get("baidu.com", "/", respheader, { host = "baidu.com" })

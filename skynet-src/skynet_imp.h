@@ -4,6 +4,7 @@
 struct skynet_config {
 	int thread;
 	int harbor;
+	int monitorChk;
 	const char * daemon;
 	const char * module_path;
 	const char * bootstrap;

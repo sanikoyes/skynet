@@ -1,4 +1,4 @@
-thread = 8
+thread = 1
 logger = nil
 harbor = 0
 start = "main"

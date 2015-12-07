@@ -24,9 +24,57 @@
   <ItemGroup>
     <Compile Include=".\examples\test.lua" />
     <Compile Include="examples\leveldb_test.lua" />
+    <Compile Include="lualib\cluster.lua" />
+    <Compile Include="lualib\datacenter.lua" />
+    <Compile Include="lualib\dns.lua" />
+    <Compile Include="lualib\http\httpc.lua" />
+    <Compile Include="lualib\http\httpd.lua" />
+    <Compile Include="lualib\http\internal.lua" />
+    <Compile Include="lualib\http\sockethelper.lua" />
+    <Compile Include="lualib\http\url.lua" />
+    <Compile Include="lualib\loader.lua" />
+    <Compile Include="lualib\md5.lua" />
+    <Compile Include="lualib\mongo.lua" />
+    <Compile Include="lualib\mqueue.lua" />
+    <Compile Include="lualib\multicast.lua" />
+    <Compile Include="lualib\mysql.lua" />
+    <Compile Include="lualib\redis.lua" />
+    <Compile Include="lualib\sharedata.lua" />
+    <Compile Include="lualib\sharedata\corelib.lua" />
+    <Compile Include="lualib\sharemap.lua" />
+    <Compile Include="lualib\skynet.lua" />
+    <Compile Include="lualib\skynet\debug.lua" />
+    <Compile Include="lualib\skynet\harbor.lua" />
+    <Compile Include="lualib\skynet\inject.lua" />
+    <Compile Include="lualib\skynet\injectcode.lua" />
+    <Compile Include="lualib\skynet\manager.lua" />
+    <Compile Include="lualib\skynet\queue.lua" />
+    <Compile Include="lualib\skynet\remotedebug.lua" />
+    <Compile Include="lualib\snax.lua" />
+    <Compile Include="lualib\snax\gateserver.lua" />
+    <Compile Include="lualib\snax\hotfix.lua" />
+    <Compile Include="lualib\snax\interface.lua" />
+    <Compile Include="lualib\snax\loginserver.lua" />
+    <Compile Include="lualib\snax\msgserver.lua" />
+    <Compile Include="lualib\socket.lua" />
+    <Compile Include="lualib\socketchannel.lua" />
+    <Compile Include="lualib\sproto.lua" />
+    <Compile Include="lualib\sprotoloader.lua" />
+    <Compile Include="lualib\sprotoparser.lua" />
+    <Compile Include="lualib\zset\test.lua" />
+    <Compile Include="lualib\zset\test_sl.lua" />
+    <Compile Include="lualib\zset\zset.lua" />
+    <Compile Include="test\testskiplist.lua" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="examples\" />
+    <Folder Include="test\" />
+    <Folder Include="lualib\" />
+    <Folder Include="lualib\zset" />
+    <Folder Include="lualib\http" />
+    <Folder Include="lualib\snax" />
+    <Folder Include="lualib\skynet" />
+    <Folder Include="lualib\sharedata" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
 </Project>

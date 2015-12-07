@@ -71,7 +71,7 @@ end
 skynet.start(function()
 
 	local db=mysql.connect{
-		host="127.0.0.1",
+		host="192.168.1.35",
 		port=3306,
 		database="skynet",
 		user="root",

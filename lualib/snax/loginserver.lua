@@ -47,11 +47,13 @@ local function write(service, fd, text)
 	assert_socket(service, socket.write(fd, text), fd)
 end
 
-local function launch_slave(auth_handler)
+local function launch_slave(auth_handler, auth_timeout)
+	local auth_timeout_chk = {}
 	local function auth(fd, addr)
 		fd = assert(tonumber(fd))
 		skynet.error(string.format("connect from %s (fd = %d)", addr, fd))
 		socket.start(fd)
+		auth_timeout_chk[fd] = {skynet.now(), addr}
 
 		-- set socket buffer limit (8K)
 		-- If the attacker send large package, close the socket
@@ -84,11 +86,12 @@ local function launch_slave(auth_handler)
 
 		local ok, server, uid =  pcall(auth_handler,token)
 
-		socket.abandon(fd)
 		return ok, server, uid, secret
 	end
 
-	local function ret_pack(ok, err, ...)
+	local function ret_pack(fd, ok, err, ...)
+		socket.abandon(fd)
+		auth_timeout_chk[fd] = nil
 		if ok then
 			skynet.ret(skynet.pack(err, ...))
 		else
@@ -99,9 +102,29 @@ local function launch_slave(auth_handler)
 			end
 		end
 	end
-
-	skynet.dispatch("lua", function(_,_,...)
-		ret_pack(pcall(auth, ...))
+	if auth_timeout then
+		if auth_timeout < 100 then auth_timeout = 100 end
+		skynet.fork(function ()
+			while true do
+				skynet.sleep(100)
+				local ct = skynet.now()
+				local pre_fd = nil
+				while true do
+					local fd, t = next(auth_timeout_chk, pre_fd)
+					if t == nil then
+						break
+					end
+					if ct - t[1] > auth_timeout then
+						skynet.error(string.format("auth timeout : %s (fd = %d)", t[2], fd))
+						socket.close(fd)
+					end
+					pre_fd = fd
+				end
+			end
+		end)
+	end
+	skynet.dispatch("lua", function(_,_,fd,...)
+		ret_pack(fd, pcall(auth, fd, ...))
 	end)
 end
 
@@ -110,14 +133,16 @@ local user_login = {}
 local function accept(conf, s, fd, addr)
 	-- call slave auth
 	local ok, server, uid, secret = skynet.call(s, "lua",  fd, addr)
-	socket.start(fd)
 
 	if not ok then
 		if ok ~= nil then
 			write("response 401", fd, "401 Unauthorized\n")
+			error(server)
+		else
+			error(socket_error)
 		end
-		error(server)
 	end
+	socket.start(fd)
 
 	if not conf.multilogin then
 		if user_login[uid] then
@@ -182,9 +207,10 @@ local function login(conf)
 		local loginmaster = skynet.localname(name)
 		if loginmaster then
 			local auth_handler = assert(conf.auth_handler)
+			local auth_timeout = conf.auth_timeout
 			launch_master = nil
 			conf = nil
-			launch_slave(auth_handler)
+			launch_slave(auth_handler, auth_timeout)
 		else
 			launch_slave = nil
 			conf.auth_handler = nil

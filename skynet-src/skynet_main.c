@@ -148,6 +148,7 @@ main(int argc, char *argv[]) {
 	config.daemon = optstring("daemon", NULL);
 	config.logger = optstring("logger", NULL);
 	config.logservice = optstring("logservice", "logger");
+	config.monitorChk = optint("monitorChk", 0);
 
 	lua_close(L);
 

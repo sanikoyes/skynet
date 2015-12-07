@@ -7,6 +7,8 @@ local server = {
 	port = 8001,
 	multilogin = false,	-- disallow multilogin
 	name = "login_master",
+	instance = 1,
+	auth_timeout = 5000
 }
 
 local server_list = {}

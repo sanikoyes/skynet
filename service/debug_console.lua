@@ -102,7 +102,7 @@ skynet.start(function()
 			for k,v in ipairs(t) do
 				t[k] = tostring(v)
 			end
-			socket.write(id, table.concat(t," "))
+			socket.write(id, table.concat(t,"\t"))
 			socket.write(id, "\r\n")
 		end
 		socket.start(id)

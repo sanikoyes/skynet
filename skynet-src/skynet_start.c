@@ -24,6 +24,7 @@ struct monitor {
 	pthread_mutex_t mutex;
 	int sleep;
 	int quit;
+	int chk;
 };
 
 struct worker_parm {
@@ -89,8 +90,10 @@ thread_monitor(void *p) {
 	for (;;) {
 		CHECK_ABORT
 #ifndef _DEBUG
-		for (i=0;i<n;i++) {
-			skynet_monitor_check(m->m[i]);
+		if (m->chk != 0) {
+			for (i=0;i<n;i++) {
+				skynet_monitor_check(m->m[i]);
+			}
 		}
 #endif
 		for (i=0;i<5;i++) {
@@ -152,7 +155,7 @@ thread_worker(void *p) {
 }
 
 static void
-start(int thread) {
+start(int thread, int monitorChk) {
 #ifdef _MSC_VER
 	assert(thread <= 32);
 	pthread_t pid[32+3];
@@ -164,6 +167,7 @@ start(int thread) {
 	memset(m, 0, sizeof(*m));
 	m->count = thread;
 	m->sleep = 0;
+	m->chk = monitorChk;
 
 	m->m = skynet_malloc(thread * sizeof(struct skynet_monitor *));
 	int i;
@@ -253,7 +257,7 @@ skynet_start(struct skynet_config * config) {
 
 	bootstrap(ctx, config->bootstrap);
 
-	start(config->thread);
+	start(config->thread, config->monitorChk);
 
 	// harbor_exit may call socket send, so it should exit before socket_free
 	skynet_harbor_exit();
