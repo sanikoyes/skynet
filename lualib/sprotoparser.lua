@@ -165,10 +165,8 @@ end
 
 local buildin_types = {
 	integer = 0,
-	real = 1,
-	boolean = 2,
-	string = 3,
-	variant = 4,
+	boolean = 1,
+	string = 2,
 }
 
 local function checktype(types, ptype, t)
@@ -196,7 +194,7 @@ local function check_protocol(r)
 		local request = v.request
 		local response = v.response
 		local p = map[tag]
-		
+
 		if p then
 			error(string.format("redefined protocol tag %d at %s", tag, name))
 		end
@@ -342,9 +340,6 @@ local function packtype(name, t, alltypes)
 end
 
 local function packproto(name, p, alltypes)
---	if p.request == nil then
---		error(string.format("Protocol %s need request", name))
---	end
 	if p.request then
 		local request = alltypes[p.request]
 		if request == nil then
