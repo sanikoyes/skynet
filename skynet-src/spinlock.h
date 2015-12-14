@@ -1,6 +1,8 @@
 #ifndef SKYNET_SPINLOCK_H
 #define SKYNET_SPINLOCK_H
 
+#include <unistd.h>
+
 #define SPIN_INIT(q) spinlock_init(&(q)->lock);
 #define SPIN_LOCK(q) spinlock_lock(&(q)->lock);
 #define SPIN_UNLOCK(q) spinlock_unlock(&(q)->lock);
@@ -34,6 +36,7 @@ spinlock_unlock(struct spinlock *lock) {
 
 static inline void
 spinlock_destroy(struct spinlock *lock) {
+	(void) lock;
 }
 
 #else

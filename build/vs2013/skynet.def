@@ -27,9 +27,8 @@ EXPORTS
 
 	skynet_timeout
 	skynet_updatetime
-	skynet_gettime
-	skynet_gettime_fixsec
 	skynet_timer_init
+	skynet_now
 
 	skynet_socket_init
 	skynet_socket_exit
@@ -48,6 +47,7 @@ EXPORTS
 	skynet_socket_udp_connect
 	skynet_socket_udp_send
 	skynet_socket_udp_address
+	skynet_socket_shutdown
 
 	skynet_context_new
 	skynet_context_grab

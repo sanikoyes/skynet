@@ -80,12 +80,17 @@ int pipe(int fd[2]) {
 	int listen_fd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 	struct sockaddr_in sin;
 	sin.sin_family = AF_INET;
-	sin.sin_port = htons(7788);
 	sin.sin_addr.S_un.S_addr = inet_addr("127.0.0.1");
-	if(bind(listen_fd, (struct sockaddr*)&sin, sizeof(sin)) == SOCKET_ERROR) {
-		closesocket(listen_fd);
-		return -1;
+
+	srand(time(NULL));
+	// use random port(range from 60000 to 60999) to simulate pipe()
+	for(;;) {
+		int port = 60000 + rand() % 1000;
+		sin.sin_port = htons(port);
+		if(bind(listen_fd, (struct sockaddr*)&sin, sizeof(sin)) != SOCKET_ERROR)
+			break;
 	}
+
 	listen(listen_fd, 5);
 	printf("Windows sim pipe() listen at %s:%d\n", inet_ntoa(sin.sin_addr), ntohs(sin.sin_port));
 
@@ -168,9 +173,9 @@ int read(int fd, void *buffer, size_t sz) {
 	//return -1;
 }
 
-void close(int fd) {
+int close(int fd) {
 	shutdown(fd, SD_BOTH);
-	closesocket(fd);
+	return closesocket(fd);
 }
 
 int daemon(int a, int b) {

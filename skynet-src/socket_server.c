@@ -119,6 +119,7 @@ struct request_setudp {
 
 struct request_close {
 	int id;
+	int shutdown;
 	uintptr_t opaque;
 };
 
@@ -338,7 +339,9 @@ force_close(struct socket_server *ss, struct socket *s, struct socket_message *r
 		sp_del(ss->event_fd, s->fd);
 	}
 	if (s->type != SOCKET_TYPE_BIND) {
-		close(s->fd);
+		if (close(s->fd) < 0) {
+			perror("close socket:");
+		}
 	}
 	s->type = SOCKET_TYPE_INVALID;
 }
@@ -794,7 +797,7 @@ close_socket(struct socket_server *ss, struct request_close *request, struct soc
 		if (type != -1)
 			return type;
 	}
-	if (send_buffer_empty(s)) {
+	if (request->shutdown || send_buffer_empty(s)) {
 		force_close(ss,s,result);
 		result->id = id;
 		result->opaque = request->opaque;
@@ -845,10 +848,12 @@ start_socket(struct socket_server *ss, struct request_start *request, struct soc
 		result->data = "start";
 		return SOCKET_OPEN;
 	} else if (s->type == SOCKET_TYPE_CONNECTED) {
+		// todo: maybe we should send a message SOCKET_TRANSFER to s->opaque
 		s->opaque = request->opaque;
 		result->data = "transfer";
 		return SOCKET_OPEN;
 	}
+	// if s->type == SOCKET_TYPE_HALFCLOSE , SOCKET_CLOSE message will send later
 	return -1;
 }
 
@@ -1102,7 +1107,10 @@ report_connect(struct socket_server *ss, struct socket *s, struct socket_message
 	int code = getsockopt(s->fd, SOL_SOCKET, SO_ERROR, &error, &len);  
 	if (code < 0 || error) {  
 		force_close(ss,s, result);
-		result->data = strerror(errno);
+		if (code >= 0)
+			result->data = strerror(error);
+		else
+			result->data = strerror(errno);
 		return SOCKET_ERROR;
 	} else {
 		s->type = SOCKET_TYPE_CONNECTED;
@@ -1370,6 +1378,17 @@ void
 socket_server_close(struct socket_server *ss, uintptr_t opaque, int id) {
 	struct request_package request;
 	request.u.close.id = id;
+	request.u.close.shutdown = 0;
+	request.u.close.opaque = opaque;
+	send_request(ss, &request, 'K', sizeof(request.u.close));
+}
+
+
+void
+socket_server_shutdown(struct socket_server *ss, uintptr_t opaque, int id) {
+	struct request_package request;
+	request.u.close.id = id;
+	request.u.close.shutdown = 1;
 	request.u.close.opaque = opaque;
 	send_request(ss, &request, 'K', sizeof(request.u.close));
 }

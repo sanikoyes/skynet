@@ -47,4 +47,4 @@ char *strsep(char **stringp, const char *delim);
 
 int write(int fd, const void *ptr, size_t sz);
 int read(int fd, void *buffer, size_t sz);
-void close(int fd);
+int close(int fd);
