@@ -143,11 +143,16 @@ int read(int fd, void *buffer, size_t sz) {
 	// read console input
 	if(fd == 0) {
 		char *buf = (char *) buffer;
-		while(_kbhit()) {
+		while(buf - (char *) buffer < sz) {
+
+			if(!_kbhit())
+				break;
 			char ch = _getch();
 			*buf++ = ch;
 			_putch(ch);
 			if(ch == '\r') {
+				if(buf - (char *) buffer >= sz)
+					break;
 				*buf++ = '\n';
 				_putch('\n');
 			}

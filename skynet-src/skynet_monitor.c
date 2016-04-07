@@ -39,7 +39,9 @@ skynet_monitor_check(struct skynet_monitor *sm) {
 	if (sm->version == sm->check_version) {
 		if (sm->destination) {
 			skynet_context_endless(sm->destination);
+#ifndef _WIN32
 			skynet_error(NULL, "A message from [ :%08x ] to [ :%08x ] maybe in an endless loop (version = %d)", sm->source , sm->destination, sm->version);
+#endif
 		}
 	} else {
 		sm->check_version = sm->version;
