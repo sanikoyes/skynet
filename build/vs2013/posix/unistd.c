@@ -55,7 +55,8 @@ int clock_gettime(int what, struct timespec *ti) {
 		QueryPerformanceCounter(&counter);
 
 		ti->tv_sec = counter.QuadPart / freq;
-		ti->tv_nsec = (counter.QuadPart / (freq / MICROSEC)) % MICROSEC;
+		ti->tv_nsec = (LONGLONG)(counter.QuadPart / ((double)freq / NANOSEC)) % NANOSEC;
+		//ti->tv_nsec *= 1000;
 		return 0;
 	default:
 		__asm int 3;
