@@ -331,7 +331,7 @@ void cpoll_cleanup()
 {
 	GUARD();
     WSACleanup();
-	for(std::map<int, cp_internal>::iterator itr = cp_data.begin(); itr != cp_data.end(); ++itr)
-		cpoll_close(itr->first);
+	while(!cp_data.empty())
+		cpoll_close(cp_data.begin()->first);
     cp_data.clear();
 }

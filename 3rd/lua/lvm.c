@@ -200,18 +200,19 @@ void luaV_finishset (lua_State *L, const TValue *t, TValue *key,
   for (loop = 0; loop < MAXTAGLOOP; loop++) {
     const TValue *tm;
     if (oldval != NULL) {
-      lua_assert(ttistable(t) && ttisnil(oldval));
+      Table *h = hvalue(t);
+      lua_assert(ttisnil(oldval));
       /* must check the metamethod */
-      if ((tm = fasttm(L, hvalue(t)->metatable, TM_NEWINDEX)) == NULL &&
+      if ((tm = fasttm(L, h->metatable, TM_NEWINDEX)) == NULL &&
          /* no metamethod; is there a previous entry in the table? */
          (oldval != luaO_nilobject ||
          /* no previous entry; must create one. (The next test is
             always true; we only need the assignment.) */
-         (oldval = luaH_newkey(L, hvalue(t), key), 1))) {
+         (oldval = luaH_newkey(L, h, key), 1))) {
         /* no metamethod and (now) there is an entry with given key */
         setobj2t(L, cast(TValue *, oldval), val);
-        invalidateTMcache(hvalue(t));
-        luaC_barrierback(L, hvalue(t), val);
+        invalidateTMcache(h);
+        luaC_barrierback(L, h, val);
         return;
       }
       /* else will try the metamethod */
@@ -1162,7 +1163,7 @@ void luaV_execute (lua_State *L) {
           oci->u.l.savedpc = nci->u.l.savedpc;
           oci->callstatus |= CIST_TAIL;  /* function was tail called */
           ci = L->ci = oci;  /* remove new frame */
-          lua_assert(L->top == oci->u.l.base + getproto(ofunc)->maxstacksize);
+          lua_assert(L->top == oci->u.l.base + getproto(ofunc)->sp->maxstacksize);
           goto newframe;  /* restart luaV_execute over new Lua function */
         }
         vmbreak;

@@ -330,7 +330,7 @@ pushstring(lua_State *L, const char * msg, int size) {
 	integer size
 	return
 		userdata queue
-		integer type
+		string type (lua_upvalueindex(TYPE_*))
 		integer fd
 		string msg | lightuserdata/integer
  */

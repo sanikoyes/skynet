@@ -46,6 +46,13 @@
 
 #define MAX_UDP_PACKAGE 65535
 
+// EAGAIN and EWOULDBLOCK may be not the same value.
+#if (EAGAIN != EWOULDBLOCK)
+#define AGAIN_WOULDBLOCK EAGAIN : case EWOULDBLOCK
+#else
+#define AGAIN_WOULDBLOCK EAGAIN
+#endif
+
 struct write_buffer {
 	struct write_buffer * next;
 	void *buffer;
@@ -482,7 +489,7 @@ send_list_tcp(struct socket_server *ss, struct socket *s, struct wb_list *list, 
 				switch(errno) {
 				case EINTR:
 					continue;
-				case EAGAIN:
+				case AGAIN_WOULDBLOCK:
 					return -1;
 				}
 				force_close(ss,s, result);
@@ -538,7 +545,7 @@ send_list_udp(struct socket_server *ss, struct socket *s, struct wb_list *list, 
 		if (err < 0) {
 			switch(errno) {
 			case EINTR:
-			case EAGAIN:
+			case AGAIN_WOULDBLOCK:
 				return -1;
 			}
 			fprintf(stderr, "socket-server : udp (%d) sendto error %s.\n",s->id, strerror(errno));
@@ -712,7 +719,7 @@ send_socket(struct socket_server *ss, struct request_send * request, struct sock
 			if (n<0) {
 				switch(errno) {
 				case EINTR:
-				case EAGAIN:
+				case AGAIN_WOULDBLOCK:
 					n = 0;
 					break;
 				default:
@@ -839,7 +846,7 @@ start_socket(struct socket_server *ss, struct request_start *request, struct soc
 	}
 	if (s->type == SOCKET_TYPE_PACCEPT || s->type == SOCKET_TYPE_PLISTEN) {
 		if (sp_add(ss->event_fd, s->fd, s)) {
-			s->type = SOCKET_TYPE_INVALID;
+			force_close(ss, s, result);
 			result->data = strerror(errno);
 			return SOCKET_ERROR;
 		}
@@ -1006,7 +1013,7 @@ forward_message_tcp(struct socket_server *ss, struct socket *s, struct socket_me
 		switch(errno) {
 		case EINTR:
 			break;
-		case EAGAIN:
+		case AGAIN_WOULDBLOCK:
 			fprintf(stderr, "socket-server: EAGAIN capture.\n");
 			break;
 		default:
@@ -1068,7 +1075,7 @@ forward_message_udp(struct socket_server *ss, struct socket *s, struct socket_me
 	if (n<0) {
 		switch(errno) {
 		case EINTR:
-		case EAGAIN:
+		case AGAIN_WOULDBLOCK:
 			break;
 		default:
 			// close when error

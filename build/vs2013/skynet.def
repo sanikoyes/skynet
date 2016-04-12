@@ -1,6 +1,7 @@
 EXPORTS
 	malloc_used_memory
 	malloc_memory_block
+	malloc_current_memory
 	memory_info_dump
 	mallctl_int64
 	mallctl_opt

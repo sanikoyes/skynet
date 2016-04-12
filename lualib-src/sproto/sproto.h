@@ -16,6 +16,10 @@ struct sproto_type;
 #define SPROTO_TVARIANT 4
 #define SPROTO_TSTRUCT 5
 
+#define SPROTO_CB_ERROR -1
+#define SPROTO_CB_NIL -2
+#define SPROTO_CB_NOARRAY -3
+
 struct sproto * sproto_create(const void * proto, size_t sz);
 void sproto_release(struct sproto *);
 

@@ -1,4 +1,5 @@
 local skynet = require "skynet"
+local uuid = require 'uuid'
 
 skynet.start(function()
 	local loginserver = skynet.newservice("logind")
