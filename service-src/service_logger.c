@@ -39,13 +39,11 @@ _logger(struct skynet_context * context, void *ud, int type, int session, uint32
 	wchar_t *wbuf = (wchar_t*)malloc((sz+1)*sizeof(wchar_t));
 	MultiByteToWideChar(CP_UTF8,0,msg,sz,wbuf,wlen);
 	wbuf[wlen]=0;
-	fwprintf(inst->handle,L"%s",wbuf);
-	fwprintf(inst->handle, L"\n");
+	fwprintf(inst->handle,L"%s\n",wbuf);
 
-	if(inst->handle != stdout) {
-		fwprintf(stdout, L"%s", wbuf);
-		fwprintf(stdout, L"\n");
-	}
+	if(inst->handle != stdout)
+		fwprintf(stdout, L"%s\n", wbuf);
+
 	free(wbuf);
 #else
 	fprintf(inst->handle, "[:%08x] ",source);
