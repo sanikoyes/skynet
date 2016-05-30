@@ -1,4 +1,5 @@
 #include "unistd.h"
+#include <assert.h>
 #define _WINSOCK_DEPRECATED_NO_WARNINGS
 #define WIN32_LEAN_AND_MEAN
 #include <conio.h>
@@ -76,6 +77,14 @@ void sigaction(int flag, struct sigaction *action, int param) {
 	//__asm int 3;
 }
 
+static void
+socket_keepalive(int fd) {
+	int keepalive = 1;
+	int ret = setsockopt(fd, SOL_SOCKET, SO_KEEPALIVE, (void *)&keepalive , sizeof(keepalive));  
+
+	assert(ret != SOCKET_ERROR);
+}
+
 int pipe(int fd[2]) {
 
 	int listen_fd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
@@ -95,6 +104,8 @@ int pipe(int fd[2]) {
 	listen(listen_fd, 5);
 	printf("Windows sim pipe() listen at %s:%d\n", inet_ntoa(sin.sin_addr), ntohs(sin.sin_port));
 
+	socket_keepalive(listen_fd);
+
 	int client_fd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 	if(connect(client_fd, (struct sockaddr*)&sin, sizeof(sin)) == SOCKET_ERROR) {
 		closesocket(listen_fd);
@@ -110,6 +121,10 @@ int pipe(int fd[2]) {
 
 	fd[0] = client_sock;
 	fd[1] = client_fd;
+
+	socket_keepalive(client_sock);
+	socket_keepalive(client_fd);
+
 	return 0;
 
 	////HANDLE hReadPipe, hWritePipe;
