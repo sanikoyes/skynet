@@ -680,6 +680,8 @@ encode_default(const struct sproto_arg *args) {
 	lua_pushstring(L, args->tagname);
 	if (args->index > 0) {
 		lua_newtable(L);
+		lua_rawset(L, -3);
+		return SPROTO_CB_NOARRAY;
 	} else {
 		switch(args->type) {
 		case SPROTO_TINTEGER:
@@ -719,9 +721,9 @@ encode_default(const struct sproto_arg *args) {
 			}
 			break;
 		}
+		lua_rawset(L, -3);
+		return SPROTO_CB_NIL;
 	}
-	lua_rawset(L, -3);
-	return 0;
 }
 
 /*
