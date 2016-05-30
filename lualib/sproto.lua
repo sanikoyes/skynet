@@ -216,13 +216,13 @@ function host:dispatch(...)
 	else
 		-- response
 		local session = assert(header_tmp.session, "session not found")
-		local response = assert(self.__session[session], "Unknown session")
+		local proto = assert(self.__session[session], "Unknown session")
 		self.__session[session] = nil
-		if response == true then
-			return "RESPONSE", session, nil, header.ud
+		if not proto.response then
+			return "RESPONSE", proto.name, nil, session, header.ud
 		else
-			local result = core.decode(response, content)
-			return "RESPONSE", session, result, header.ud
+			local result = core.decode(proto.response, content)
+			return "RESPONSE", proto.name, result, session, header.ud
 		end
 	end
 end
@@ -236,7 +236,7 @@ function host:attach(sp)
 		local header = core.encode(self.__package, header_tmp)
 
 		if session then
-			self.__session[session] = proto.response or true
+			self.__session[session] = proto
 		end
 
 		if args then
