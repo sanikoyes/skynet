@@ -258,6 +258,16 @@ function skynet.timeout(ti, func)
 	session_id_coroutine[session] = co
 end
 
+function skynet.timer(ti, func)
+	local f
+	f = function()
+		if func(ti) then
+			skynet.timeout(ti, f)
+		end
+	end
+	skynet.timeout(ti, f)
+end
+
 function skynet.sleep(ti)
 	local session = c.intcommand("TIMEOUT",ti)
 	assert(session)

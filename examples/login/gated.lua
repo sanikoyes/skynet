@@ -41,6 +41,14 @@ function server.login_handler(uid, secret)
 	return id
 end
 
+-- call by msgserver, when client connected to gated
+function server.connect_handler(username, fd)
+	local u = username_map[username]
+	if u then
+		skynet.call(u.agent, "lua", "connect", fd)
+	end
+end
+
 -- call by agent
 function server.logout_handler(uid, subid)
 	local u = users[uid]
@@ -74,9 +82,9 @@ function server.disconnect_handler(username)
 end
 
 -- call by self (when recv a request from client)
-function server.request_handler(username, msg)
+function server.request_handler(username, msg, sz)
 	local u = username_map[username]
-	return skynet.tostring(skynet.rawcall(u.agent, "client", msg))
+	return skynet.tostring(skynet.rawcall(u.agent, "client", msg, sz))
 end
 
 -- call by self (when gate open)

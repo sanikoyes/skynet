@@ -25,6 +25,10 @@
 #include <map>
 #include <vector>
 
+
+#include <stdio.h>
+#include <string>
+ 
 struct fd_t
 {
     int fd;
