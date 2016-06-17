@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <string.h>
 
 #ifdef _MSC_VER
 #define WIN32_LEAN_AND_MEAN
@@ -11,6 +12,7 @@
 
 struct logger {
 	FILE * handle;
+	char * filename;
 	int close;
 };
 
@@ -19,6 +21,8 @@ logger_create(void) {
 	struct logger * inst = skynet_malloc(sizeof(*inst));
 	inst->handle = NULL;
 	inst->close = 0;
+	inst->filename = NULL;
+
 	return inst;
 }
 
@@ -27,12 +31,26 @@ logger_release(struct logger * inst) {
 	if (inst->close) {
 		fclose(inst->handle);
 	}
+	skynet_free(inst->filename);
 	skynet_free(inst);
 }
 
 static int
-_logger(struct skynet_context * context, void *ud, int type, int session, uint32_t source, const void * msg, size_t sz) {
+logger_cb(struct skynet_context * context, void *ud, int type, int session, uint32_t source, const void * msg, size_t sz) {
 	struct logger * inst = ud;
+	switch (type) {
+	case PTYPE_SYSTEM:
+		if (inst->filename) {
+			inst->handle = freopen(inst->filename, "a", inst->handle);
+		}
+		break;
+	case PTYPE_TEXT:
+		fprintf(inst->handle, "[:%08x] ",source);
+		fwrite(msg, sz , 1, inst->handle);
+		fprintf(inst->handle, "\n");
+		fflush(inst->handle);
+		break;
+	}
 #ifdef _MSC_VER
 	fwprintf(inst->handle, L"[:%08x] ",source);
 	int wlen = MultiByteToWideChar(CP_UTF8,0,msg,sz,NULL,0);
@@ -62,6 +80,8 @@ logger_init(struct logger * inst, struct skynet_context *ctx, const char * parm)
 		if (inst->handle == NULL) {
 			return 1;
 		}
+		inst->filename = skynet_malloc(strlen(parm)+1);
+		strcpy(inst->filename, parm);
 		inst->close = 1;
 	} else {
 		inst->handle = stdout;
@@ -70,7 +90,7 @@ logger_init(struct logger * inst, struct skynet_context *ctx, const char * parm)
 	_wsetlocale(0, L"chs");
 #endif
 	if (inst->handle) {
-		skynet_callback(ctx, inst, _logger);
+		skynet_callback(ctx, inst, logger_cb);
 		skynet_command(ctx, "REG", ".logger");
 		return 0;
 	}
