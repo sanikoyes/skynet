@@ -28,6 +28,7 @@ EXPORTS
 	clock_gettime
 	flock
 	sigaction
+	sigfillset
 	pipe
 	daemon
 	strsep
