@@ -133,7 +133,7 @@ function server.start(conf)
 		login = assert(conf.login_handler),
 		logout = assert(conf.logout_handler),
 		kick = assert(conf.kick_handler),
-		broadcast = assert(conf.boradcast),
+		broadcast = assert(conf.broadcast),
 	}
 
 	function handler.command(cmd, source, ...)

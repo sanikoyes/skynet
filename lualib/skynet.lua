@@ -560,6 +560,13 @@ end
 
 skynet.error = c.error
 
+function skynet.log(msg, ...)
+    local msg = string.format(msg, ...)
+    msg = "[" .. os.date() .. "]" .. msg
+    
+    c.error(msg)
+end
+
 ----- register protocol
 do
 	local REG = skynet.register_protocol
