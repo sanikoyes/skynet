@@ -1,3 +1,7 @@
+## Skynet
+
+Skynet is a lightweight online game framework, and it can be used in many other fields.
+
 ## 前言
 #### 本仓库skynet支持windows下运行，只支持visual studio 2013，请确认你的编译器已经打好SP4补丁
 #### 因为很重要，所以强调一遍，请给你的vs2013打上SP4补丁，否则会编译出错。
@@ -70,13 +74,11 @@ Run these in different consoles:
 
 ## About Lua version
 
-Skynet now uses a modified version of lua 5.3.3 ( http://www.lua.org/ftp/lua-5.3.3.tar.gz ) .
-
-For details: http://lua-users.org/lists/lua-l/2014-03/msg00489.html
+Skynet now uses a modified version of lua 5.3.3 ( https://github.com/ejoy/lua/tree/skynet ) for multiple lua states.
 
 You can also use official Lua versions, just edit the Makefile by yourself.
 
 ## How To Use (Sorry, Only in Chinese now)
 
-* Read Wiki https://github.com/cloudwu/skynet/wiki
+* Read Wiki for documents https://github.com/cloudwu/skynet/wiki
 * The FAQ in wiki https://github.com/cloudwu/skynet/wiki/FAQ
