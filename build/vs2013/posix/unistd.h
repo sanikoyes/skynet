@@ -36,8 +36,11 @@ int flock(int fd, int flag);
 
 struct sigaction {
 	void (*sa_handler)(int);
+	int sa_flags;
+	int sa_mask;
 };
-enum { SIGPIPE };
+enum { SIGPIPE, SIGHUP, SA_RESTART };
+void sigfillset(int *flag);
 void sigaction(int flag, struct sigaction *action, int param);
 
 int pipe(int fd[2]);

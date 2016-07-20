@@ -72,6 +72,10 @@ int flock(int fd, int flag) {
 	__asm int 3;
 }
 
+void sigfillset(int *flag) {
+	// Not implemented
+}
+
 void sigaction(int flag, struct sigaction *action, int param) {
 	// Not implemented
 	//__asm int 3;
