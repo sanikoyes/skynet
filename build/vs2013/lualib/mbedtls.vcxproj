@@ -1,0 +1,277 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\aes.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\aesni.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\arc4.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\asn1parse.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\asn1write.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\base64.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\bignum.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\blowfish.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\camellia.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\ccm.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\certs.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\cipher.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\cipher_wrap.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\ctr_drbg.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\debug.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\des.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\dhm.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\ecdh.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\ecdsa.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\ecjpake.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\ecp.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\ecp_curves.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\entropy.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\entropy_poll.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\error.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\gcm.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\havege.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\hmac_drbg.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\md.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\md2.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\md4.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\md5.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\md_wrap.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\memory_buffer_alloc.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\net.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\oid.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\padlock.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\pem.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\pk.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\pkcs11.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\pkcs12.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\pkcs5.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\pkparse.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\pkwrite.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\pk_wrap.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\platform.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\ripemd160.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\rsa.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\sha1.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\sha256.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\sha512.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\ssl_cache.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\ssl_ciphersuites.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\ssl_cli.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\ssl_cookie.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\ssl_srv.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\ssl_ticket.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\ssl_tls.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\threading.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\timing.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\version.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\version_features.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\x509.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\x509write_crt.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\x509write_csr.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\x509_create.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\x509_crl.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\x509_crt.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\x509_csr.c" />
+    <ClCompile Include="..\..\..\3rd\mbedtls\library\xtea.c" />
+    <ClCompile Include="..\..\..\lualib-src\mbedtls\lua-buffer.c" />
+    <ClCompile Include="..\..\..\lualib-src\mbedtls\lua-mbedtls.c" />
+    <ClCompile Include="..\..\..\lualib-src\mbedtls\src\aes.c">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)l_aes.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)l_aes.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\..\lualib-src\mbedtls\src\base64.c">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)l_base64.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)l_base64.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\..\lualib-src\mbedtls\src\ctr_drbg.c">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)l_ctr_drbg.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)l_ctr_drbg.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\..\lualib-src\mbedtls\src\entropy.c">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)l_entropy.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)l_entropy.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\..\lualib-src\mbedtls\src\md.c">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)l_md.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)l_md.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\..\lualib-src\mbedtls\src\pk.c">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)l_pk.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)l_pk.obj</ObjectFileName>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\3rd\lua53.vcxproj">
+      <Project>{2ff46585-569f-4371-85ee-55e41fd38e8b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\3rd\posix.vcxproj">
+      <Project>{44f52237-ae31-499f-a74c-4e02b0fad898}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="mbedtls.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\..\3rd\mbedtls\library\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\aes.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\aesni.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\arc4.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\asn1.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\asn1write.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\base64.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\bignum.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\blowfish.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\bn_mul.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\camellia.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\ccm.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\certs.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\check_config.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\cipher.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\cipher_internal.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\compat-1.3.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\config.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\ctr_drbg.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\debug.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\des.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\dhm.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\ecdh.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\ecdsa.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\ecjpake.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\ecp.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\entropy.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\entropy_poll.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\error.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\gcm.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\havege.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\hmac_drbg.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\md.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\md2.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\md4.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\md5.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\md_internal.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\memory_buffer_alloc.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\net.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\oid.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\padlock.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\pem.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\pk.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\pkcs11.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\pkcs12.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\pkcs5.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\pk_internal.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\platform.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\platform_time.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\ripemd160.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\rsa.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\sha1.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\sha256.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\sha512.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\ssl.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\ssl_cache.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\ssl_ciphersuites.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\ssl_cookie.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\ssl_internal.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\ssl_ticket.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\threading.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\timing.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\version.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\x509.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\x509_crl.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\x509_crt.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\x509_csr.h" />
+    <ClInclude Include="..\..\..\3rd\mbedtls\include\mbedtls\xtea.h" />
+    <ClInclude Include="..\..\..\lualib-src\mbedtls\lua-mbedtls.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{58C40686-8767-44E7-8236-2D1E4000BD60}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>lua53</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IntDir>..\output\$(ProjectName)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)..\..\luaclib\</OutDir>
+    <TargetExt>.so</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <IntDir>..\output\$(ProjectName)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)..\..\luaclib\</OutDir>
+    <TargetExt>.so</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;LUA_BUILD_AS_DLL;_DEBUG;_WINDOWS;_USRDLL;LUA53_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\..\3rd\lua;..\..\..\3rd\mbedtls\include;..\..\..\skynet-src;..\..\..\lualib-src\mbedtls;..\posix;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir);$(SolutionDir)..\..\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ModuleDefinitionFile>$(ProjectDir)$(ProjectName).def</ModuleDefinitionFile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;LUA_BUILD_AS_DLL;NDEBUG;_WINDOWS;_USRDLL;LUA53_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\..\3rd\lua;..\..\..\3rd\mbedtls\include;..\..\..\skynet-src;..\..\..\lualib-src\mbedtls;..\posix;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(SolutionDir);$(SolutionDir)..\..\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ModuleDefinitionFile>$(ProjectDir)$(ProjectName).def</ModuleDefinitionFile>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

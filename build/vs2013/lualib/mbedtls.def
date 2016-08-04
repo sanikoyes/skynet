@@ -1,0 +1,9 @@
+EXPORTS
+	luaopen_mbedtls_core
+	luaopen_mbedtls_aes_core
+	luaopen_mbedtls_base64_core
+	luaopen_mbedtls_ctr_drbg_core
+	luaopen_mbedtls_entropy_core
+	luaopen_mbedtls_md_core
+	luaopen_mbedtls_pk_core
+	
