@@ -1,0 +1,14 @@
+--- This file is part of LuaDist project
+
+name = "lua-signal"
+version = "1.000"
+
+desc = "Lua support for ANSI C signals."
+url = "http://luaforge.net/projects/luasignal/"
+maintainer = "Peter Kapec"
+author = "Patrick J. Donnelly"
+license = "MIT"
+
+depends = {
+	"lua ~> 5.1"
+}
