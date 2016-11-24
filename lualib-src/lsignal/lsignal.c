@@ -160,6 +160,8 @@ static void handle(int sig)
   Hcount = lua_gethookcount(Lsig);
   Nsig = sig;
 
+  // printf("Signal handle hooked %d\n", sig);
+
   lua_sethook(Lsig, sighook, LUA_MASKCALL | LUA_MASKRET | LUA_MASKCOUNT, 1);
   /*
   switch (sig)
@@ -187,7 +189,7 @@ static void handle(int sig)
 static int l_signal(lua_State *L)
 {
   int args = lua_gettop(L);
-  int t, sig; /* type, signal */
+  int t, sig = 0; /* type, signal */
 
   /* get type of signal */
   luaL_checkany(L, 1);
@@ -258,7 +260,7 @@ static int l_signal(lua_State *L)
 
 static int l_raise(lua_State *L)
 {
-  int args = lua_gettop(L);
+  //int args = lua_gettop(L);
   int t = 0; /* type */
   lua_Number ret;
 
@@ -344,7 +346,8 @@ int luaopen_signal(lua_State *L)
   int i = 0;
 
   /* add the library */
-  luaL_register(L, "signal", lsignal_lib);
+  lua_newtable(L);
+  luaL_setfuncs(L, lsignal_lib, 0);
 
   /* push lua_signals table into the registry */
   /* put the signals inside the library table too,
