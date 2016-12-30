@@ -192,9 +192,11 @@ read_size(uint8_t * buffer) {
 	return r;
 }
 
+
 static void
 push_more(lua_State *L, int fd, uint8_t *buffer, int size) {
-	if (size == SIZE_LENGTH - 1) {
+
+	if (size <= SIZE_LENGTH - 1) {
 		struct uncomplete * uc = save_uncomplete(L, fd);
 		uc->read = -(SIZE_LENGTH - 1);
 		uc->header = *buffer;
@@ -233,13 +235,14 @@ close_uncomplete(lua_State *L, int fd) {
 
 static int
 filter_data_(lua_State *L, int fd, uint8_t * buffer, int size) {
+
 	struct queue *q = lua_touserdata(L,1);
 	struct uncomplete * uc = find_uncomplete(q, fd);
 	if (uc) {
 		// fill uncomplete
 		if (uc->read < 0) {
 			// read size
-			assert(uc->read == -1);
+			assert(uc->read == -(SIZE_LENGTH - 1));
 			int pack_size = *buffer;
 			pack_size |= uc->header << 8 ;
 			++buffer;
@@ -275,9 +278,9 @@ filter_data_(lua_State *L, int fd, uint8_t * buffer, int size) {
 		lua_pushvalue(L, lua_upvalueindex(TYPE_MORE));
 		return 2;
 	} else {
-		if (size == 1) {
+		if (size <= SIZE_LENGTH - 1) {
 			struct uncomplete * uc = save_uncomplete(L, fd);
-			uc->read = -1;
+			uc->read = -(SIZE_LENGTH - 1);
 			uc->header = *buffer;
 			return 1;
 		}
@@ -359,6 +362,13 @@ lfilter(lua_State *L) {
 	case SKYNET_SOCKET_TYPE_DATA:
 		// ignore listen id (message->id)
 		assert(size == -1);	// never padding string
+
+		//static FILE *fp = NULL;
+		//if(fp == NULL)
+		//	fp = fopen("protocol.bin", "wb+");
+		//fwrite(buffer, message->ud, 1, fp);
+		//fflush(fp);
+
 		return filter_data(L, message->id, (uint8_t *)buffer, message->ud);
 	case SKYNET_SOCKET_TYPE_CONNECT:
 		// ignore listen fd connect
