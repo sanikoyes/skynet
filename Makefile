@@ -57,7 +57,7 @@ update3rd :
 # skynet
 
 CSERVICE = snlua logger gate harbor
-LUA_CLIB = skynet socketdriver bson mongo md5 netpack msgpack \
+LUA_CLIB = skynet socketdriver bson mongo md5 netpack msgpack marshal \
   clientsocket memory profile multicast \
   cluster crypt sharedata stm sproto lpeg \
   mysqlaux debugchannel ltask skiplist mbedtls signal
@@ -107,6 +107,9 @@ $(LUA_CLIB_PATH)/netpack.so : lualib-src/lua-netpack.c | $(LUA_CLIB_PATH)
 	$(CC) $(CFLAGS) $(SHARED) $^ -Iskynet-src -o $@ 
 
 $(LUA_CLIB_PATH)/msgpack.so : lualib-src/lua-msgpack.c | $(LUA_CLIB_PATH)
+	$(CC) $(CFLAGS) $(SHARED) $^ -Iskynet-src -o $@ 
+
+$(LUA_CLIB_PATH)/marshal.so : lualib-src/lua-marshal.c | $(LUA_CLIB_PATH)
 	$(CC) $(CFLAGS) $(SHARED) $^ -Iskynet-src -o $@ 
 
 $(LUA_CLIB_PATH)/clientsocket.so : lualib-src/lua-clientsocket.c | $(LUA_CLIB_PATH)
