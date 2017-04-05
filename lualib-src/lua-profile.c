@@ -1,3 +1,5 @@
+#define LUA_LIB
+
 #include <stdio.h>
 #include <lua.h>
 #include <lauxlib.h>
@@ -200,7 +202,7 @@ lyield_co(lua_State *L) {
 	return timing_yield(L);
 }
 
-int
+LUAMOD_API int
 luaopen_profile(lua_State *L) {
 	luaL_checkversion(L);
 	luaL_Reg l[] = {

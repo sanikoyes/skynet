@@ -167,7 +167,7 @@ clean :
 
 cleanall: clean
 ifneq (,$(wildcard 3rd/jemalloc/Makefile))
-	cd 3rd/jemalloc && $(MAKE) clean
+	cd 3rd/jemalloc && $(MAKE) clean && rm Makefile
 endif
 ifneq (,$(wildcard 3rd/mbedtls/Makefile))
 	cd 3rd/mbedtls && $(MAKE) clean

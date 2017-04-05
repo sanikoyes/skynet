@@ -1,3 +1,5 @@
+#define LUA_LIB
+
 #include <lua.h>
 #include <lauxlib.h>
 #include <stdlib.h>
@@ -234,7 +236,7 @@ lread(lua_State *L) {
 	}
 }
 
-int
+LUAMOD_API int
 luaopen_stm(lua_State *L) {
 	luaL_checkversion(L);
 	lua_createtable(L, 0, 3);
