@@ -78,24 +78,33 @@ _query(const char * name) {
 	return NULL;
 }
 
-static int
-_open_sym(struct skynet_module *mod) {
+static void *
+get_api(struct skynet_module *mod, const char *api_name) {
 	size_t name_size = strlen(mod->name);
-#ifdef _MSC_VER
-	assert(name_size <= 1024);
-	char tmp[1024 + 9]; // create/init/release/signal , longest name is release (7)
+	size_t api_size = strlen(api_name);
+#ifdef _WIN32
+	assert(name_size + api_size + 1 <= 4096);
+	char tmp[4096];
 #else
-	char tmp[name_size + 9]; // create/init/release/signal , longest name is release (7)
+	char tmp[name_size + api_size + 1];
 #endif
 	memcpy(tmp, mod->name, name_size);
-	strcpy(tmp+name_size, "_create");
-	mod->create = dlsym(mod->module, tmp);
-	strcpy(tmp+name_size, "_init");
-	mod->init = dlsym(mod->module, tmp);
-	strcpy(tmp+name_size, "_release");
-	mod->release = dlsym(mod->module, tmp);
-	strcpy(tmp+name_size, "_signal");
-	mod->signal = dlsym(mod->module, tmp);
+	memcpy(tmp+name_size, api_name, api_size+1);
+	char *ptr = strrchr(tmp, '.');
+	if (ptr == NULL) {
+		ptr = tmp;
+	} else {
+		ptr = ptr + 1;
+	}
+	return dlsym(mod->module, ptr);
+}
+
+static int
+open_sym(struct skynet_module *mod) {
+	mod->create = get_api(mod, "_create");
+	mod->init = get_api(mod, "_init");
+	mod->release = get_api(mod, "_release");
+	mod->signal = get_api(mod, "_signal");
 
 	return mod->init == NULL;
 }
@@ -117,7 +126,7 @@ skynet_module_query(const char * name) {
 			M->m[index].name = name;
 			M->m[index].module = dl;
 
-			if (_open_sym(&M->m[index]) == 0) {
+			if (open_sym(&M->m[index]) == 0) {
 				M->m[index].name = skynet_strdup(name);
 				M->count ++;
 				result = &M->m[index];
