@@ -31,22 +31,28 @@ static const luaL_Reg funcs[] = {
 // size_t mbedtls_pk_get_bitlen( const mbedtls_pk_context *ctx );
 // static inline size_t mbedtls_pk_get_len( const mbedtls_pk_context *ctx )
 // int mbedtls_pk_can_do( const mbedtls_pk_context *ctx, mbedtls_pk_type_t type );
-// int mbedtls_pk_verify( mbedtls_pk_context *ctx, mbedtls_md_type_t md_alg,
-//                const unsigned char *hash, size_t hash_len,
-//                const unsigned char *sig, size_t sig_len );
+
+static int l_mbedtls_pk_verify(lua_State *L) {
+
+	mbedtls_pk_context *ctx = (mbedtls_pk_context *) luaL_checkudata(L, 1, CLASS_NAME);
+	lua_Integer md_alg = luaL_checkinteger(L, 2);
+	size_t hash_len;
+	const unsigned char *hash = (const unsigned char *) luaL_checklstring(L, 3, &hash_len);
+	size_t sig_len;
+	const unsigned char *sig = (const unsigned char *) luaL_checklstring(L, 4, &sig_len);
+
+	lua_pushinteger(L, mbedtls_pk_verify(ctx, md_alg, hash, hash_len, sig, sig_len));
+	return 1;
+}
 // int mbedtls_pk_verify_ext( mbedtls_pk_type_t type, const void *options,
 //                    mbedtls_pk_context *ctx, mbedtls_md_type_t md_alg,
 //                    const unsigned char *hash, size_t hash_len,
 //                    const unsigned char *sig, size_t sig_len );
 
-// int mbedtls_pk_sign( mbedtls_pk_context *ctx, mbedtls_md_type_t md_alg,
-//              const unsigned char *hash, size_t hash_len,
-//              unsigned char *sig, size_t *sig_len,
-//              int (*f_rng)(void *, unsigned char *, size_t), void *p_rng );
 static int l_mbedtls_pk_sign(lua_State *L) {
 
 	mbedtls_pk_context *ctx = (mbedtls_pk_context *) luaL_checkudata(L, 1, CLASS_NAME);
-	int md_alg = luaL_checkinteger(L, 2);
+	lua_Integer md_alg = luaL_checkinteger(L, 2);
 	size_t hash_len;
 	const unsigned char *hash = (const unsigned char *) luaL_checklstring(L, 3, &hash_len);
 	mbedtls_ctr_drbg_context *ctr_drbg = (mbedtls_ctr_drbg_context *) luaL_checkudata(L, 4, "mbedtls_ctr_drbg_context");
@@ -54,20 +60,49 @@ static int l_mbedtls_pk_sign(lua_State *L) {
 	// TODO:
 	int (*f_rng)(void *, unsigned char *, size_t) = mbedtls_ctr_drbg_random;
 
-	unsigned char sig[1024];
+	unsigned char sig[4096];
 	size_t sig_len;
 	lua_pushinteger(L, mbedtls_pk_sign(ctx, md_alg, hash, hash_len, sig, &sig_len, f_rng, ctr_drbg));
 	lua_pushlstring(L, (const char *) sig, sig_len);
 	return 2;
 }
-// int mbedtls_pk_decrypt( mbedtls_pk_context *ctx,
-//                 const unsigned char *input, size_t ilen,
-//                 unsigned char *output, size_t *olen, size_t osize,
-//                 int (*f_rng)(void *, unsigned char *, size_t), void *p_rng );
-// int mbedtls_pk_encrypt( mbedtls_pk_context *ctx,
-//                 const unsigned char *input, size_t ilen,
-//                 unsigned char *output, size_t *olen, size_t osize,
-//                 int (*f_rng)(void *, unsigned char *, size_t), void *p_rng );
+
+static int l_mbedtls_pk_decrypt(lua_State *L) {
+
+	mbedtls_pk_context *ctx = (mbedtls_pk_context *) luaL_checkudata(L, 1, CLASS_NAME);
+
+	size_t ilen;
+	const unsigned char *input = (const unsigned char *) luaL_checklstring(L, 2, &ilen);
+	mbedtls_ctr_drbg_context *ctr_drbg = (mbedtls_ctr_drbg_context *) luaL_checkudata(L, 3, "mbedtls_ctr_drbg_context");
+
+	// TODO:
+	int (*f_rng)(void *, unsigned char *, size_t) = mbedtls_ctr_drbg_random;
+
+	unsigned char output[4096];
+	size_t olen;
+	lua_pushinteger(L, mbedtls_pk_decrypt(ctx, input, ilen, output, &olen, sizeof(output), f_rng, ctr_drbg));
+	lua_pushlstring(L, (const char *) output, olen);
+	return 2;
+}
+
+static int l_mbedtls_pk_encrypt(lua_State *L) {
+
+	mbedtls_pk_context *ctx = (mbedtls_pk_context *) luaL_checkudata(L, 1, CLASS_NAME);
+
+	size_t ilen;
+	const unsigned char *input = (const unsigned char *) luaL_checklstring(L, 2, &ilen);
+	mbedtls_ctr_drbg_context *ctr_drbg = (mbedtls_ctr_drbg_context *) luaL_checkudata(L, 3, "mbedtls_ctr_drbg_context");
+
+	// TODO:
+	int (*f_rng)(void *, unsigned char *, size_t) = mbedtls_ctr_drbg_random;
+
+	unsigned char output[4096];
+	size_t olen;
+	lua_pushinteger(L, mbedtls_pk_encrypt(ctx, input, ilen, output, &olen, sizeof(output), f_rng, ctr_drbg));
+	lua_pushlstring(L, (const char *) output, olen);
+	return 2;
+}
+
 // int mbedtls_pk_check_pair( const mbedtls_pk_context *pub, const mbedtls_pk_context *prv );
 // int mbedtls_pk_debug( const mbedtls_pk_context *ctx, mbedtls_pk_debug_item *items );
 // const char * mbedtls_pk_get_name( const mbedtls_pk_context *ctx );
@@ -86,6 +121,15 @@ static int l_mbedtls_pk_parse_key(lua_State *L) {
 
 // int mbedtls_pk_parse_public_key( mbedtls_pk_context *ctx,
 //                          const unsigned char *key, size_t keylen );
+static int l_mbedtls_pk_parse_public_key(lua_State *L) {
+
+	mbedtls_pk_context *ctx = (mbedtls_pk_context *) luaL_checkudata(L, 1, CLASS_NAME);
+	size_t keylen;
+	const unsigned char *key = (const unsigned char *) luaL_checklstring(L, 2, &keylen);
+	lua_pushinteger(L, mbedtls_pk_parse_public_key(ctx, key, keylen));
+	return 1;
+}
+
 // int mbedtls_pk_parse_keyfile( mbedtls_pk_context *ctx,
 //                       const char *path, const char *password );
 // int mbedtls_pk_parse_public_keyfile( mbedtls_pk_context *ctx, const char *path );
@@ -108,7 +152,11 @@ static int l_gc(lua_State *L) {
 
 static const luaL_Reg methods[] = {
 	{ "parse_key", l_mbedtls_pk_parse_key },
+	{ "parse_public_key", l_mbedtls_pk_parse_public_key },
+	{ "verify", l_mbedtls_pk_verify },
 	{ "sign", l_mbedtls_pk_sign },
+	{ "decrypt", l_mbedtls_pk_decrypt },
+	{ "encrypt", l_mbedtls_pk_encrypt },
 	{ "__gc", l_gc },
 	{ NULL, NULL },
 };
