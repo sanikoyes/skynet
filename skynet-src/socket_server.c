@@ -53,6 +53,8 @@
 #define AGAIN_WOULDBLOCK EAGAIN
 #endif
 
+#define WARNING_SIZE (1024*1024)
+
 struct write_buffer {
 	struct write_buffer * next;
 	void *buffer;
@@ -79,6 +81,7 @@ struct socket {
 	int id;
 	uint16_t protocol;
 	uint32_t type;
+	int64_t warn_size;
 	union {
 		int size;
 		uint8_t udp_address[UDP_ADDRESS_SIZE];
@@ -393,6 +396,7 @@ new_fd(struct socket_server *ss, int id, int fd, int protocol, uintptr_t opaque,
 	s->p.size = MIN_READ_BUFFER;
 	s->opaque = opaque;
 	s->wb_size = 0;
+	s->warn_size = 0;
 	check_wb_list(&s->high);
 	check_wb_list(&s->low);
 	return s;
@@ -605,6 +609,11 @@ raise_uncomplete(struct socket * s) {
 	high->head = high->tail = tmp;
 }
 
+static inline int
+send_buffer_empty(struct socket *s) {
+	return (s->high.head == NULL && s->low.head == NULL);
+}
+
 /*
 	Each socket has two write buffer list, high priority and low priority.
 
@@ -629,15 +638,24 @@ send_buffer(struct socket_server *ss, struct socket *s, struct socket_message *r
 			// step 3
 			if (list_uncomplete(&s->low)) {
 				raise_uncomplete(s);
+				return -1;
 			}
-		} else {
+		} 
 			// step 4
+		assert(send_buffer_empty(s) && s->wb_size == 0);
 			sp_write(ss->event_fd, s->fd, s, false);
 
 			if (s->type == SOCKET_TYPE_HALFCLOSE) {
 				force_close(ss, s, result);
 				return SOCKET_CLOSE;
 			}
+		if(s->warn_size > 0){
+				s->warn_size = 0;
+				result->opaque = s->opaque;
+				result->id = s->id;
+				result->ud = 0;
+				result->data = NULL;
+				return SOCKET_WARNING;
 		}
 	}
 
@@ -684,10 +702,6 @@ append_sendbuffer_low(struct socket_server *ss,struct socket *s, struct request_
 	s->wb_size += buf->sz;
 }
 
-static inline int
-send_buffer_empty(struct socket *s) {
-	return (s->high.head == NULL && s->low.head == NULL);
-}
 
 /*
 	When send a package , we can assign the priority : PRIORITY_HIGH or PRIORITY_LOW
@@ -764,6 +778,14 @@ send_socket(struct socket_server *ss, struct request_send * request, struct sock
 			append_sendbuffer_udp(ss,s,priority,request,udp_address);
 		}
 	}
+	if (s->wb_size >= WARNING_SIZE && s->wb_size >= s->warn_size) {
+		s->warn_size = s->warn_size == 0 ? WARNING_SIZE *2 : s->warn_size*2;
+		result->opaque = s->opaque;
+		result->id = s->id;
+		result->ud = s->wb_size%1024 == 0 ? s->wb_size/1024 : s->wb_size/1024 + 1;
+		result->data = NULL;
+		return SOCKET_WARNING;
+	}
 	return -1;
 }
 
@@ -801,7 +823,8 @@ close_socket(struct socket_server *ss, struct request_close *request, struct soc
 	}
 	if (!send_buffer_empty(s)) { 
 		int type = send_buffer(ss,s,result);
-		if (type != -1)
+		// type : -1 or SOCKET_WARNING or SOCKET_CLOSE, SOCKET_WARNING means send_buffer_empty
+		if (type != -1 && type != SOCKET_WARNING)
 			return type;
 	}
 	if (request->shutdown || send_buffer_empty(s)) {
@@ -1230,6 +1253,9 @@ socket_server_poll(struct socket_server *ss, struct socket_message * result, int
 			ss->event_index = 0;
 			if (ss->event_n <= 0) {
 				ss->event_n = 0;
+				if (errno == EINTR) {
+					continue;
+				}
 				return -1;
 			}
 		}
@@ -1282,6 +1308,21 @@ socket_server_poll(struct socket_server *ss, struct socket_message * result, int
 				if (type == -1)
 					break;
 				return type;
+			}
+			if (e->error) {
+				// close when error
+				int error;
+				socklen_t len = sizeof(error);  
+				int code = getsockopt(s->fd, SOL_SOCKET, SO_ERROR, &error, &len);  
+				if (code < 0) {
+					result->data = strerror(errno);
+				} else if (error != 0) {
+					result->data = strerror(error);
+				} else {
+					result->data = "Unknown error";
+				}
+				force_close(ss, s, result);
+				return SOCKET_ERR;
 			}
 			break;
 		}
@@ -1341,8 +1382,8 @@ free_buffer(struct socket_server *ss, const void * buffer, int sz) {
 	so.free_func((void *)buffer);
 }
 
-// return -1 when error
-int64_t 
+// return -1 when error, 0 when success
+int 
 socket_server_send(struct socket_server *ss, int id, const void * buffer, int sz) {
 	struct socket * s = &ss->slot[HASH_ID(id)];
 	if (s->id != id || s->type == SOCKET_TYPE_INVALID) {
@@ -1356,15 +1397,16 @@ socket_server_send(struct socket_server *ss, int id, const void * buffer, int sz
 	request.u.send.buffer = (char *)buffer;
 
 	send_request(ss, &request, 'D', sizeof(request.u.send));
-	return s->wb_size;
+	return 0;
 }
 
-void 
+// return -1 when error, 0 when success
+int 
 socket_server_send_lowpriority(struct socket_server *ss, int id, const void * buffer, int sz) {
 	struct socket * s = &ss->slot[HASH_ID(id)];
 	if (s->id != id || s->type == SOCKET_TYPE_INVALID) {
 		free_buffer(ss, buffer, sz);
-		return;
+		return -1;
 	}
 
 	struct request_package request;
@@ -1373,6 +1415,7 @@ socket_server_send_lowpriority(struct socket_server *ss, int id, const void * bu
 	request.u.send.buffer = (char *)buffer;
 
 	send_request(ss, &request, 'P', sizeof(request.u.send));
+	return 0;
 }
 
 void
@@ -1553,7 +1596,7 @@ socket_server_udp(struct socket_server *ss, uintptr_t opaque, const char * addr,
 	return id;
 }
 
-int64_t 
+int 
 socket_server_udp_send(struct socket_server *ss, int id, const struct socket_udp_address *addr, const void *buffer, int sz) {
 	struct socket * s = &ss->slot[HASH_ID(id)];
 	if (s->id != id || s->type == SOCKET_TYPE_INVALID) {
@@ -1583,7 +1626,7 @@ socket_server_udp_send(struct socket_server *ss, int id, const struct socket_udp
 	memcpy(request.u.send_udp.address, udp_address, addrsz);	
 
 	send_request(ss, &request, 'A', sizeof(request.u.send_udp.send)+addrsz);
-	return s->wb_size;
+	return 0;
 }
 
 int
