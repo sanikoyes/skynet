@@ -59,7 +59,7 @@ update3rd :
 CSERVICE = snlua logger gate harbor
 LUA_CLIB = skynet \
   client \
-  bson md5 sproto lpeg ltask signal skiplist mbedtls
+  bson md5 sproto lpeg mbedtls
 
 LUA_CLIB_SKYNET = \
   lua-skynet.c lua-seri.c \
@@ -76,6 +76,17 @@ LUA_CLIB_SKYNET = \
   lua-mysqlaux.c \
   lua-debugchannel.c \
   lua-datasheet.c \
+  \
+  ltask/ltask.c \
+  ltask/handlemap.c \
+  ltask/queue.c \
+  ltask/schedule.c \
+  ltask/serialize.c \
+  \
+  lsignal/lsignal.c \
+  \
+  zset/skiplist.c \
+  zset/lua-skiplist.c \
   \
 
 SKYNET_SRC = skynet_main.c skynet_handle.c skynet_module.c skynet_mq.c \
@@ -118,15 +129,6 @@ $(LUA_CLIB_PATH)/client.so : lualib-src/lua-clientsocket.c lualib-src/lua-crypt.
 
 $(LUA_CLIB_PATH)/sproto.so : lualib-src/sproto/sproto.c lualib-src/sproto/lsproto.c | $(LUA_CLIB_PATH)
 	$(CC) $(CFLAGS) $(SHARED) -Ilualib-src/sproto $^ -o $@ 
-
-$(LUA_CLIB_PATH)/ltask.so : lualib-src/ltask/ltask.c lualib-src/ltask/handlemap.c lualib-src/ltask/queue.c lualib-src/ltask/schedule.c lualib-src/ltask/serialize.c | $(LUA_CLIB_PATH)
-	$(CC) $(CFLAGS) $(SHARED) -Ilualib-src/ltask $^ -o $@ 
-
-$(LUA_CLIB_PATH)/signal.so : lualib-src/lsignal/lsignal.c | $(LUA_CLIB_PATH)
-	$(CC) $(CFLAGS) $(SHARED) -Ilualib-src/lsignal $^ -o $@ 
-
-$(LUA_CLIB_PATH)/skiplist.so : lualib-src/zset/skiplist.c lualib-src/zset/lua-skiplist.c | $(LUA_CLIB_PATH)
-	$(CC) $(CFLAGS) $(SHARED) -Ilualib-src/zset $^ -o $@ 
 
 $(LUA_CLIB_PATH)/mbedtls.so : lualib-src/mbedtls/lua-mbedtls.c \
 	lualib-src/mbedtls/lua-buffer.c \

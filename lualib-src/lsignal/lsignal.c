@@ -341,7 +341,7 @@ static const struct luaL_Reg lsignal_lib[] = {
   {NULL, NULL}
 };
 
-int luaopen_signal(lua_State *L)
+int luaopen_skynet_signal(lua_State *L)
 {
   int i = 0;
 

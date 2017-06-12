@@ -262,7 +262,7 @@ lclosechannel(lua_State *L) {
 }
 
 int
-luaopen_ltask(lua_State *L) {
+luaopen_skynet_ltask(lua_State *L) {
 	luaL_checkversion(L);
 	luaL_Reg l[] = {
 		{ "init", linit },

@@ -180,7 +180,7 @@ _release(lua_State *L) {
     return 0;
 }
 
-int luaopen_skiplist_c(lua_State *L) {
+int luaopen_skynet_skiplist_c(lua_State *L) {
     luaL_checkversion(L);
 
     luaL_Reg l[] = {
