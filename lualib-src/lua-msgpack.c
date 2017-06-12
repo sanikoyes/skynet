@@ -485,7 +485,7 @@ ltostring(lua_State *L) {
 }
 
 int
-luaopen_msgpack(lua_State *L) {
+luaopen_skynet_msgpack(lua_State *L) {
 	luaL_checkversion(L);
 	luaL_Reg l[] = {
 		{ "pop", lpop },

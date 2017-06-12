@@ -555,7 +555,7 @@ static const luaL_Reg R[] =
     {NULL,	    NULL}
 };
 
-int luaopen_marshal_core(lua_State *L)
+int luaopen_skynet_marshal_core(lua_State *L)
 {
 	luaL_newlib(L,R);
     return 1;

@@ -1,2 +1,20 @@
 EXPORTS
 	luaopen_skynet_core
+	luaopen_skynet_cluster_core
+	luaopen_skynet_crypt
+	luaopen_skynet_datasheet_core
+	luaopen_skynet_debugchannel
+	luaopen_skynet_ltask
+	luaopen_skynet_marshal_core
+	luaopen_skynet_memory
+	luaopen_skynet_mongo_driver
+	luaopen_skynet_msgpack
+	luaopen_skynet_multicast_core
+	luaopen_skynet_mysqlaux_c
+	luaopen_skynet_netpack
+	luaopen_skynet_profile
+	luaopen_skynet_sharedata_core
+	luaopen_skynet_signal
+	luaopen_skynet_skiplist_c
+	luaopen_skynet_socketdriver
+	luaopen_skynet_stm

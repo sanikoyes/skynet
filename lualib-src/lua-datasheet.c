@@ -37,6 +37,12 @@ struct table {
 	// kvpair[dict]
 };
 
+#ifdef _MSC_VER
+#define inline
+#undef LUAMOD_API
+#define LUAMOD_API
+#endif
+
 static inline const struct table *
 gettable(const struct document *doc, int index) {
 	if (doc->index[index] == INVALID_OFFSET) {
