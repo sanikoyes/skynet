@@ -96,8 +96,9 @@ static int l_mbedtls_md_finish(lua_State *L) {
 	mbedtls_md_context_t *ctx = (mbedtls_md_context_t *) luaL_checkudata(L, 1, CLASS_NAME);
 
 	unsigned char output[64];
+	int size = mbedtls_md_get_size(ctx->md_info);
 	lua_pushinteger(L, mbedtls_md_finish(ctx, output));
-	lua_pushlstring(L, (const char *) output, sizeof(output));
+	lua_pushlstring(L, (const char *) output, size);
 	return 2;
 }
 
