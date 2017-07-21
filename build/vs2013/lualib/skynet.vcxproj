@@ -11,11 +11,42 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\lualib-src\lsha1.c" />
+    <ClCompile Include="..\..\..\lualib-src\lsignal\lsignal.c" />
+    <ClCompile Include="..\..\..\lualib-src\ltask\handlemap.c" />
+    <ClCompile Include="..\..\..\lualib-src\ltask\ltask.c" />
+    <ClCompile Include="..\..\..\lualib-src\ltask\queue.c" />
+    <ClCompile Include="..\..\..\lualib-src\ltask\schedule.c" />
+    <ClCompile Include="..\..\..\lualib-src\ltask\serialize.c" />
+    <ClCompile Include="..\..\..\lualib-src\lua-cluster.c" />
+    <ClCompile Include="..\..\..\lualib-src\lua-crypt.c" />
+    <ClCompile Include="..\..\..\lualib-src\lua-datasheet.c" />
+    <ClCompile Include="..\..\..\lualib-src\lua-debugchannel.c" />
+    <ClCompile Include="..\..\..\lualib-src\lua-marshal.c" />
+    <ClCompile Include="..\..\..\lualib-src\lua-memory.c" />
+    <ClCompile Include="..\..\..\lualib-src\lua-mongo.c" />
+    <ClCompile Include="..\..\..\lualib-src\lua-msgpack.c" />
+    <ClCompile Include="..\..\..\lualib-src\lua-multicast.c" />
+    <ClCompile Include="..\..\..\lualib-src\lua-mysqlaux.c" />
+    <ClCompile Include="..\..\..\lualib-src\lua-netpack.c" />
+    <ClCompile Include="..\..\..\lualib-src\lua-profile.c" />
     <ClCompile Include="..\..\..\lualib-src\lua-seri.c" />
+    <ClCompile Include="..\..\..\lualib-src\lua-sharedata.c" />
     <ClCompile Include="..\..\..\lualib-src\lua-skynet.c" />
+    <ClCompile Include="..\..\..\lualib-src\lua-socket.c" />
+    <ClCompile Include="..\..\..\lualib-src\lua-stm.c" />
+    <ClCompile Include="..\..\..\lualib-src\zset\lua-skiplist.c" />
+    <ClCompile Include="..\..\..\lualib-src\zset\skiplist.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\lualib-src\ltask\handlemap.h" />
+    <ClInclude Include="..\..\..\lualib-src\ltask\queue.h" />
+    <ClInclude Include="..\..\..\lualib-src\ltask\schedule.h" />
+    <ClInclude Include="..\..\..\lualib-src\ltask\serialize.h" />
+    <ClInclude Include="..\..\..\lualib-src\ltask\simplelock.h" />
+    <ClInclude Include="..\..\..\lualib-src\ltask\simplethread.h" />
     <ClInclude Include="..\..\..\lualib-src\lua-seri.h" />
+    <ClInclude Include="..\..\..\lualib-src\zset\skiplist.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\3rd\lua53.vcxproj">
@@ -84,7 +115,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir);$(SolutionDir)..\..\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>skynet.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>skynet.lib;ws2_32.lib;posix.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>$(ProjectDir)$(ProjectName).def</ModuleDefinitionFile>
     </Link>
   </ItemDefinitionGroup>
@@ -105,7 +136,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(SolutionDir);$(SolutionDir)..\..\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>skynet.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>skynet.lib;ws2_32.lib;posix.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>$(ProjectDir)$(ProjectName).def</ModuleDefinitionFile>
     </Link>
   </ItemDefinitionGroup>

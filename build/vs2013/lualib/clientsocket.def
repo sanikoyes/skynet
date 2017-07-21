@@ -1,2 +1,2 @@
 EXPORTS
-	luaopen_clientsocket
+	luaopen_client_socket

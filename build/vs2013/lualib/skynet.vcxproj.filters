@@ -4,6 +4,15 @@
     <Filter Include="Source files">
       <UniqueIdentifier>{9ebf698b-6c98-4fd9-ae67-cbdd0a000184}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source files\ltask">
+      <UniqueIdentifier>{20e9524a-9b91-434e-b599-81e40f8ea071}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\lsignal">
+      <UniqueIdentifier>{b969d1aa-22c9-40a1-bc2b-e3eab5155951}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\zset">
+      <UniqueIdentifier>{8d5a496a-02d2-4453-a87d-8570e71365e8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\lualib-src\lua-seri.c">
@@ -12,10 +21,103 @@
     <ClCompile Include="..\..\..\lualib-src\lua-skynet.c">
       <Filter>Source files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\lualib-src\lua-cluster.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\lualib-src\lsha1.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\lualib-src\lua-crypt.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\lualib-src\lua-debugchannel.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\lualib-src\ltask\handlemap.c">
+      <Filter>Source files\ltask</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\lualib-src\ltask\ltask.c">
+      <Filter>Source files\ltask</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\lualib-src\ltask\queue.c">
+      <Filter>Source files\ltask</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\lualib-src\ltask\schedule.c">
+      <Filter>Source files\ltask</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\lualib-src\ltask\serialize.c">
+      <Filter>Source files\ltask</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\lualib-src\lua-memory.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\lualib-src\lua-mongo.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\lualib-src\lua-msgpack.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\lualib-src\lua-multicast.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\lualib-src\lua-mysqlaux.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\lualib-src\lua-netpack.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\lualib-src\lua-profile.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\lualib-src\lua-sharedata.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\lualib-src\lsignal\lsignal.c">
+      <Filter>Source files\lsignal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\lualib-src\zset\lua-skiplist.c">
+      <Filter>Source files\zset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\lualib-src\zset\skiplist.c">
+      <Filter>Source files\zset</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\lualib-src\lua-socket.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\lualib-src\lua-stm.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\lualib-src\lua-datasheet.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\lualib-src\lua-marshal.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\lualib-src\lua-seri.h">
       <Filter>Source files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\lualib-src\ltask\handlemap.h">
+      <Filter>Source files\ltask</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\lualib-src\ltask\queue.h">
+      <Filter>Source files\ltask</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\lualib-src\ltask\schedule.h">
+      <Filter>Source files\ltask</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\lualib-src\ltask\serialize.h">
+      <Filter>Source files\ltask</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\lualib-src\ltask\simplelock.h">
+      <Filter>Source files\ltask</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\lualib-src\ltask\simplethread.h">
+      <Filter>Source files\ltask</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\lualib-src\zset\skiplist.h">
+      <Filter>Source files\zset</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
