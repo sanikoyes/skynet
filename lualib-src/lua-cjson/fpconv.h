@@ -9,8 +9,8 @@
 #ifdef _MSC_VER
 #define inline __forceinline
 #define snprintf _snprintf
-#define strcasecmp(x,y) stricmp(x,y)
-#define strncasecmp(x,y,n) strnicmp(x,y,n)
+#define strcasecmp(x,y) _stricmp(x,y)
+#define strncasecmp(x,y,n) _strnicmp(x,y,n)
 #endif
 
 #ifdef USE_INTERNAL_FPCONV

@@ -68,6 +68,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "posix", "3rd\posix.vcxproj"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mbedtls", "lualib\mbedtls.vcxproj", "{58C40686-8767-44E7-8236-2D1E4000BD60}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lua-cjson", "lualib\lua-cjson.vcxproj", "{83F08E06-46F7-42FE-B127-5275E51927EA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -134,6 +136,10 @@ Global
 		{58C40686-8767-44E7-8236-2D1E4000BD60}.Debug|Win32.Build.0 = Debug|Win32
 		{58C40686-8767-44E7-8236-2D1E4000BD60}.Release|Win32.ActiveCfg = Release|Win32
 		{58C40686-8767-44E7-8236-2D1E4000BD60}.Release|Win32.Build.0 = Release|Win32
+		{83F08E06-46F7-42FE-B127-5275E51927EA}.Debug|Win32.ActiveCfg = Debug|Win32
+		{83F08E06-46F7-42FE-B127-5275E51927EA}.Debug|Win32.Build.0 = Debug|Win32
+		{83F08E06-46F7-42FE-B127-5275E51927EA}.Release|Win32.ActiveCfg = Release|Win32
+		{83F08E06-46F7-42FE-B127-5275E51927EA}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -152,5 +158,6 @@ Global
 		{996DE62B-C25C-476B-BE8A-3B17EE423BF7} = {8D77078A-D3DD-4C22-A938-7D1AF6456D67}
 		{44F52237-AE31-499F-A74C-4E02B0FAD898} = {223656D9-5628-47EA-8BB2-38A10EA727B2}
 		{58C40686-8767-44E7-8236-2D1E4000BD60} = {968950DD-91C6-4DB9-8A2E-7E10C89C75BB}
+		{83F08E06-46F7-42FE-B127-5275E51927EA} = {968950DD-91C6-4DB9-8A2E-7E10C89C75BB}
 	EndGlobalSection
 EndGlobal
